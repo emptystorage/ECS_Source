@@ -323,6 +323,7 @@ namespace LETO.ECS.Worlds
         }
         #endregion
 
+        #region Update
         private void OnUpdate() => OnUpdateSystems(SystemBank.GetSystems(SystemUpdateType.Update));
 
         private void OnFixedUpdate() => OnUpdateSystems(SystemBank.GetSystems(SystemUpdateType.FixedUpdate));
@@ -336,5 +337,6 @@ namespace LETO.ECS.Worlds
                 systems[i].Update();
             }
         }
+        #endregion
     }
 }

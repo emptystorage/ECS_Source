@@ -45,7 +45,8 @@ namespace LETO.ECS
         {
             Table = table;
             Entities = new Queue<Entity>(table.Entities);
-        }        
+        }
+
         public Queue<Entity> Entities { get; }
 
         public ref T1 GetComponentI(in Entity entity) => ref Table.Get(entity);

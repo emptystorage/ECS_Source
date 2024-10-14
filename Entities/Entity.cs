@@ -4,7 +4,10 @@ namespace LETO.ECS
 {
     public sealed class Entity
     {
-        internal Entity(World world) => World = world;
-        internal World World { get; }
+        private readonly World _world;
+
+        internal Entity(World world) => _world = world;
+
+        public ECSProxy MyWorld => new ECSProxy(_world);
     }
 }

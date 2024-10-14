@@ -1,5 +1,4 @@
 ﻿using System;
-using LETO.ECS.Entities;
 
 namespace LETO.ECS
 {
@@ -13,7 +12,7 @@ namespace LETO.ECS
     {
         public static void Destroy(this Entity entity)
         {
-            entity.World.DestroyEntity(entity);
+            entity.MyWorld.World.DestroyEntity(entity);
         }
 
         public static Entity AddComponent<T>(this Entity entity, ComponentAddType addType = ComponentAddType.Binded)
@@ -28,7 +27,7 @@ namespace LETO.ECS
         public static Entity AddComponent<T>(this Entity entity, ref T component, ComponentAddType addType = ComponentAddType.Binded)
             where T : struct, IComponent
         {
-            entity.World.AddComponent(entity, ref component, addType == ComponentAddType.IgnoreBinded);
+            entity.MyWorld.World.AddComponent(entity, ref component, addType == ComponentAddType.IgnoreBinded);
 
             return entity;
         }
@@ -36,7 +35,7 @@ namespace LETO.ECS
         public static Entity AddComponent<T>(this Entity entity, T component, ComponentAddType addType = ComponentAddType.Binded)
             where T : struct, IComponent
         {
-            entity.World.AddComponent(entity, ref component, addType == ComponentAddType.IgnoreBinded);
+            entity.MyWorld.World.AddComponent(entity, ref component, addType == ComponentAddType.IgnoreBinded);
 
             return entity;
         }
@@ -54,7 +53,7 @@ namespace LETO.ECS
         public static Entity RemoveComponent<T>(this Entity entity)
             where T : struct, IComponent
         {
-            entity.World.RemoveComponent<T>(entity);
+            entity.MyWorld.World.RemoveComponent<T>(entity);
 
             return entity;
         }
