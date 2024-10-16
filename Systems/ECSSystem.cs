@@ -20,6 +20,7 @@ namespace LETO.ECS
         }
 
         public abstract void Update();
+        protected internal virtual void Setup() { }
     }
 
     public abstract class ECSSystem<T1> : ECSSystem
@@ -40,6 +41,10 @@ namespace LETO.ECS
         }
 
         protected abstract void Update(in Entity entity, ref T1 component);
+        protected internal override void Setup()
+        {
+            World.EnableComponent<T1>();
+        }
     }
 
     public abstract class ECSSystem<T1,T2> : ECSSystem
@@ -63,6 +68,11 @@ namespace LETO.ECS
         }
 
         protected abstract void Update(in Entity entity, ref T1 componentI, ref T2 componentII);
+        protected internal override void Setup()
+        {
+            World.EnableComponent<T1>();
+            World.EnableComponent<T2>();
+        }
     }
 
     public abstract class ECSSystem<T1, T2, T3> : ECSSystem
@@ -88,6 +98,12 @@ namespace LETO.ECS
         }
 
         protected abstract void Update(in Entity entity, ref T1 componentI, ref T2 componentII, ref T3 componentIII);
+        protected internal override void Setup()
+        {
+            World.EnableComponent<T1>();
+            World.EnableComponent<T2>();
+            World.EnableComponent<T3>();
+        }
     }
     public abstract class ECSSystem<T1, T2, T3, T4> : ECSSystem
         where T1 : struct, IComponent
@@ -114,6 +130,13 @@ namespace LETO.ECS
         }
 
         protected abstract void Update(in Entity entity, ref T1 componentI, ref T2 componentII, ref T3 componentIII, ref T4 componentIV);
+        protected internal override void Setup()
+        {
+            World.EnableComponent<T1>();
+            World.EnableComponent<T2>();
+            World.EnableComponent<T3>();
+            World.EnableComponent<T4>();
+        }
     }
 
     public abstract class ECSSystem<T1, T2, T3, T4, T5> : ECSSystem
@@ -143,6 +166,14 @@ namespace LETO.ECS
         }
 
         protected abstract void Update(in Entity entity, ref T1 componentI, ref T2 componentII, ref T3 componentIII, ref T4 componentIV, ref T5 componentV);
+        protected internal override void Setup()
+        {
+            World.EnableComponent<T1>();
+            World.EnableComponent<T2>();
+            World.EnableComponent<T3>();
+            World.EnableComponent<T4>();
+            World.EnableComponent<T5>();
+        }
     }
 
     public abstract class ECSSystem<T1, T2, T3, T4, T5, T6> : ECSSystem
@@ -174,5 +205,14 @@ namespace LETO.ECS
         }
 
         protected abstract void Update(in Entity entity, ref T1 componentI, ref T2 componentII, ref T3 componentIII, ref T4 componentIV, ref T5 componentV, ref T6 componentVI);
+        protected internal override void Setup()
+        {
+            World.EnableComponent<T1>();
+            World.EnableComponent<T2>();
+            World.EnableComponent<T3>();
+            World.EnableComponent<T4>();
+            World.EnableComponent<T5>();
+            World.EnableComponent<T6>();
+        }
     }
 }

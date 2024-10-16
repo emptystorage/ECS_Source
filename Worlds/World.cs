@@ -102,6 +102,7 @@ namespace LETO.ECS.Worlds
         {
             var system = SystemFactory.Create<T>();
             system.World = this;
+            system.Setup();
 
             SystemBank.EnableSystem(updateType, system);
         }
