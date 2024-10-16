@@ -28,10 +28,13 @@ namespace LETO.ECS.Components
             GC.SuppressFinalize(this);
         }
 
-        internal void EnableComponent<T>()
+        internal ComponentTable<T> EnableComponent<T>()
             where T : struct, IComponent
         {
-            Tables.TryAdd(typeof(T), new ComponentTable<T>(Size));
+            var table = new ComponentTable<T>(Size);
+            Tables.TryAdd(typeof(T), table);
+
+            return table;
         }
 
         internal void DisableComponent<T>()

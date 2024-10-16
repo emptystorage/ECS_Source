@@ -71,16 +71,18 @@ namespace LETO.ECS.Worlds
         internal void AddComponent<T>(Entity entity, ref T component, bool isIgnoreBinded)
             where T : struct, IComponent
         {
-            if(ComponentBank.TryGetComponentTable<T>(out var table))
+            if(!ComponentBank.TryGetComponentTable<T>(out var table))
             {
-                if (isIgnoreBinded && table.ContainOf(entity))
-                {
-                    table.Forget(entity);
-                }
-
-                table.Bind(entity, ref component);
-                ComponentBank.AddEntityToClearn(entity, table);
+                table = ComponentBank.EnableComponent<T>();
             }
+
+            if (isIgnoreBinded && table.ContainOf(entity))
+            {
+                table.Forget(entity);
+            }
+
+            table.Bind(entity, ref component);
+            ComponentBank.AddEntityToClearn(entity, table);
         }
 
         internal void RemoveComponent<T>(Entity entity)
@@ -100,7 +102,6 @@ namespace LETO.ECS.Worlds
         {
             var system = SystemFactory.Create<T>();
             system.World = this;
-            system.Setup();
 
             SystemBank.EnableSystem(updateType, system);
         }
