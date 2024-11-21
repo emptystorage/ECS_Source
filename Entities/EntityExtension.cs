@@ -2,10 +2,10 @@
 
 namespace LETO.ECS
 {
-    public enum ComponentAddType
+    public enum WriteType
     {
-        Binded,
-        IgnoreBinded
+        Write,
+        ReWrite
     }
 
     public static class EntityExtension
@@ -15,27 +15,27 @@ namespace LETO.ECS
             entity.MyWorld.World.DestroyEntity(entity);
         }
 
-        public static Entity AddComponent<T>(this Entity entity, ComponentAddType addType = ComponentAddType.Binded)
+        public static Entity AddComponent<T>(this Entity entity, WriteType writeType = WriteType.Write)
             where T : struct, IComponent
         {
             var component = Activator.CreateInstance<T>();
-            entity.AddComponent(ref component, addType);
+            entity.AddComponent(ref component, writeType);
 
             return entity;
         }
 
-        public static Entity AddComponent<T>(this Entity entity, ref T component, ComponentAddType addType = ComponentAddType.Binded)
+        public static Entity AddComponent<T>(this Entity entity, ref T component, WriteType writeType = WriteType.Write)
             where T : struct, IComponent
         {
-            entity.MyWorld.World.AddComponent(entity, ref component, addType == ComponentAddType.IgnoreBinded);
+            entity.MyWorld.World.AddComponent(entity, ref component, writeType == WriteType.ReWrite);
 
             return entity;
         }
 
-        public static Entity AddComponent<T>(this Entity entity, T component, ComponentAddType addType = ComponentAddType.Binded)
+        public static Entity AddComponent<T>(this Entity entity, T component, WriteType writeType = WriteType.Write)
             where T : struct, IComponent
         {
-            entity.MyWorld.World.AddComponent(entity, ref component, addType == ComponentAddType.IgnoreBinded);
+            entity.MyWorld.World.AddComponent(entity, ref component, writeType == WriteType.ReWrite);
 
             return entity;
         }
